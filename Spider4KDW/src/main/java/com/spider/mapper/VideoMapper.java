@@ -17,9 +17,9 @@ public interface VideoMapper {
 	 @Select("select count(id) from Video")
 	 public int getCount();
 	 
-	 @Select("select url from Video limit 10")
+	 @Select("select url from Video v where v.Mp4Url is NULL")
 	 public List<String> findAllUrl();
 	 
-	 @Update("update Video set Mp4Url=#{dto.Mp4Url} where url=#{dto.url}")
+	 @Update("update Video set Mp4Url=#{Mp4Url} where url=#{url}")
 	 public void saveMp4Url(Mp4UrlDto dto);
 }

@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.spider.mapper.VideoMapper;
+import com.spider.pipline.Mp4UrlPipline;
 import com.spider.po.Video;
 import com.spider.service.FindMp4UrlService;
 
@@ -26,6 +27,8 @@ public class test {
 	private VideoMapper videoMapper;
 	@Resource
 	private FindMp4UrlService findMp4UrlService;
+	@Resource
+	private Mp4UrlPipline mp4UrlPipline;
 
 	
 	Logger log = Logger.getLogger(test.class);
@@ -47,15 +50,17 @@ public class test {
 	
 	@Test
 	public void testBean(){
+		System.out.println(mp4UrlPipline.getClass());
+		System.out.println(videoMapper.getClass());
 		//findMp4UrlService.test("www.baidu.com");
 	}
 	
 	@Test
 	public void testFindMp4Service(){
 		List<String> urls = videoMapper.findAllUrl();
-		for (String url : urls) {
-			log.info("zhaoxiaoming--------------------"+url);
-			findMp4UrlService.test(url);
+		for (int i=0; i<urls.size(); i++) {
+			log.info("zhaoxiaoming----------"+i+"/"+urls.size()+"----------");
+			findMp4UrlService.test(urls.get(i));
 		}
 	}
 	
