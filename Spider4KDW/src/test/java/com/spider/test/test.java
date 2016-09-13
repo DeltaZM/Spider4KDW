@@ -14,7 +14,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.spider.mapper.VideoMapper;
 import com.spider.pipline.Mp4UrlPipline;
 import com.spider.po.Video;
+import com.spider.service.DownFileService;
 import com.spider.service.FindMp4UrlService;
+import com.spider.service.VideoService;
 
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.model.ConsolePageModelPipeline;
@@ -29,10 +31,15 @@ public class test {
 	private FindMp4UrlService findMp4UrlService;
 	@Resource
 	private Mp4UrlPipline mp4UrlPipline;
-
+	@Resource
+	private DownFileService downFileService;
+	@Resource
+	private VideoService videoService;
 	
 	Logger log = Logger.getLogger(test.class);
-
+	
+	private final String path = "http://www.cao7000.com/get_file/3/baba8c6f9b849d5f92ce878d52a7a1a1/33000/33109/33109.mp4";
+	private final String str = "夫妻";
 	@Test
 	public void testPoVideo() {
 		OOSpider.create(Site.me(), new ConsolePageModelPipeline(), Video.class)
@@ -68,5 +75,27 @@ public class test {
 	public void testBean1(){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:/spring/applicationContext-mybatis.xml");
 		System.out.println(context.getBean("mp4UrlPipline"));
+	}
+	
+	@Test 
+	public void down(){
+		downFileService.down(path,10);
+	}
+	
+	@Test
+	public void testLikeQuery(){
+		List<Video> list = videoService.findVideoByTitle(str);
+		System.out.println("------------------"+list.size());
+		System.out.println("------------------"+videoService.finAll().size());
+	}
+	
+	@Test
+	public void updataDataSouece(){
+		List<Video> list = videoMapper.findAllVideoInfo();
+//		System.out.println(list.get(0).getUrl());
+//		String url = list.get(0).getUrl();
+//		for (int i = 0; i < ary.length; i++) {
+//			System.out.println(ary[i].toString());
+//		}
 	}
 }

@@ -13,8 +13,12 @@
 	<!--开启自动扫描组件 -->
 	<context:component-scan base-package="com.spider" />
 
+
+
 	<!--mvc自动注解组件 -->
 	<mvc:annotation-driven />
+	<!--静态资源不拦截 -->
+	<mvc:resources mapping="/js/**" location="/js/" />
 
 	<!--定义一个视图适配器 -->
 	<bean

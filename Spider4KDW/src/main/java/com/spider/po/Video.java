@@ -61,6 +61,21 @@ public class Video {
 		return "Video [id=" + id + ", title=" + title + ", url=" + url + ", time=" + time + ", ratepositive="
 				+ ratepositive + ", Mp4Url=" + Mp4Url + "]";
 	}
+
+	public Video(int id, String title, String url, String time, String ratepositive, String mp4Url) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.url = url;
+		this.time = time;
+		this.ratepositive = ratepositive;
+		Mp4Url = mp4Url;
+	}
+
+	public Video() {
+		super();
+	}
+	
 	
 	
 }
